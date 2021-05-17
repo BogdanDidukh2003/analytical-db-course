@@ -66,7 +66,7 @@ CREATE TABLE [conversation_fact] (
 	[region_id] [int] NOT NULL,
 	[demographic_id] [int] NOT NULL,
 	[operator_id] [int] NOT NULL,
-	[average_rating] [float] NOT NULL,
+	[average_rating] [float] NULL,
 	[reported_issues] [int] NOT NULL,
 	[resolved_issues] [int] NOT NULL,
 	[total_calls] [int] NOT NULL,
