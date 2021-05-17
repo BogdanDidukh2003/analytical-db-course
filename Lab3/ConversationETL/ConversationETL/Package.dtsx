@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{865FA1E6-0791-4670-8BD6-8FBA573325F2}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{441D21B2-49D1-4810-863C-FCB922F58069}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -65,6 +65,802 @@
           SQLTask:Connection="{73FF7811-80BD-48E7-898D-8A623C616D43}"
           SQLTask:SqlStmtSourceType="FileConnection"
           SQLTask:SqlStatementSource="Conversation_StagingTableCreator.sql" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Conversation Fact Table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{142BB064-355F-4485-A644-12EA5CAE2224}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Conversation Fact Table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination - Conversation Fact Table"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[conversation_fact]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Connections[OleDbConnection]"
+                  connectionManagerID="{73FF7811-80BD-48E7-898D-8A623C616D43}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-BBNFPV8.ConversationStarSchema]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].Columns[time_id]"
+                      cachedDataType="i4"
+                      cachedName="time_id"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[time_id]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[time_id]" />
+                    <inputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].Columns[region_id]"
+                      cachedDataType="i4"
+                      cachedName="region_id"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[region_id]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[region_id]" />
+                    <inputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].Columns[demographic_id]"
+                      cachedDataType="i4"
+                      cachedName="demographic_id"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[demographic_id]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[demographic_id]" />
+                    <inputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].Columns[operator_id]"
+                      cachedDataType="i4"
+                      cachedName="operator_id"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[operator_id]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[operator_id]" />
+                    <inputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].Columns[average_rating]"
+                      cachedDataType="r8"
+                      cachedName="average_rating"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[average_rating]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[average_rating]" />
+                    <inputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].Columns[reported_issues]"
+                      cachedDataType="i4"
+                      cachedName="reported_issues"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[reported_issues]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[reported_issues]" />
+                    <inputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].Columns[resolved_issues]"
+                      cachedDataType="i4"
+                      cachedName="resolved_issues"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[resolved_issues]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[resolved_issues]" />
+                    <inputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].Columns[total_calls]"
+                      cachedDataType="i4"
+                      cachedName="total_calls"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[total_calls]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[total_calls]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[time_id]"
+                      dataType="i4"
+                      name="time_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[region_id]"
+                      dataType="i4"
+                      name="region_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[demographic_id]"
+                      dataType="i4"
+                      name="demographic_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[operator_id]"
+                      dataType="i4"
+                      name="operator_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[average_rating]"
+                      dataType="r8"
+                      name="average_rating" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[reported_issues]"
+                      dataType="i4"
+                      name="reported_issues" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[resolved_issues]"
+                      dataType="i4"
+                      name="resolved_issues" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input].ExternalColumns[total_calls]"
+                      dataType="i4"
+                      name="total_calls" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source - Staging Table"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[conversation_staging]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Connections[OleDbConnection]"
+                  connectionManagerID="{73FF7811-80BD-48E7-898D-8A623C616D43}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DESKTOP-BBNFPV8.ConversationStarSchema]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[time_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[time_id]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[time_id]"
+                      name="time_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[region_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[region_id]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[region_id]"
+                      name="region_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[demographic_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[demographic_id]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[demographic_id]"
+                      name="demographic_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[operator_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[operator_id]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[operator_id]"
+                      name="operator_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[average_rating]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[average_rating]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[average_rating]"
+                      name="average_rating"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[reported_issues]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[reported_issues]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[reported_issues]"
+                      name="reported_issues"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[resolved_issues]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[resolved_issues]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[resolved_issues]"
+                      name="resolved_issues"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[total_calls]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[total_calls]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[total_calls]"
+                      name="total_calls"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[customer_birth_year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[customer_birth_year]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[customer_birth_year]"
+                      name="customer_birth_year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[customer_gender]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[customer_gender]"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[customer_gender]"
+                      name="customer_gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[country]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[country]"
+                      name="country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[region]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[region]"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[region]"
+                      name="region"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[email]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[email]"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[email]"
+                      name="email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[operator_birth_year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[operator_birth_year]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[operator_birth_year]"
+                      name="operator_birth_year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[operator_gender]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[operator_gender]"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[operator_gender]"
+                      name="operator_gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[department_name]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[department_name]"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[department_name]"
+                      name="department_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[department_country]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[department_country]"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[department_country]"
+                      name="department_country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[department_region]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[department_region]"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[department_region]"
+                      name="department_region"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[department_city]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[department_city]"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[department_city]"
+                      name="department_city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[department_street]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[department_street]"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[department_street]"
+                      name="department_street"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[year]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[year]"
+                      name="year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[month]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[month]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[month]"
+                      name="month"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[day]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[day]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[day]"
+                      name="day"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[hour]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[hour]"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].Columns[hour]"
+                      name="hour"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[time_id]"
+                      dataType="i4"
+                      name="time_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[region_id]"
+                      dataType="i4"
+                      name="region_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[demographic_id]"
+                      dataType="i4"
+                      name="demographic_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[operator_id]"
+                      dataType="i4"
+                      name="operator_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[average_rating]"
+                      dataType="r8"
+                      name="average_rating" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[reported_issues]"
+                      dataType="i4"
+                      name="reported_issues" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[resolved_issues]"
+                      dataType="i4"
+                      name="resolved_issues" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[total_calls]"
+                      dataType="i4"
+                      name="total_calls" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[customer_birth_year]"
+                      dataType="i4"
+                      name="customer_birth_year" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[customer_gender]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="customer_gender" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="region" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[email]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="email" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[operator_birth_year]"
+                      dataType="i4"
+                      name="operator_birth_year" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[operator_gender]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="operator_gender" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[department_name]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="department_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[department_country]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="department_country" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[department_region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="department_region" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[department_city]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="department_city" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[department_street]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="department_street" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[year]"
+                      dataType="i4"
+                      name="year" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[month]"
+                      dataType="i4"
+                      name="month" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[day]"
+                      dataType="i4"
+                      name="day" />
+                    <externalMetadataColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output].ExternalColumns[hour]"
+                      dataType="i4"
+                      name="hour" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[time_id]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[time_id]"
+                      name="time_id" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[region_id]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[region_id]"
+                      name="region_id" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[demographic_id]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[demographic_id]"
+                      name="demographic_id" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[operator_id]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[operator_id]"
+                      name="operator_id" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[average_rating]"
+                      dataType="r8"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[average_rating]"
+                      name="average_rating" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[reported_issues]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[reported_issues]"
+                      name="reported_issues" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[resolved_issues]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[resolved_issues]"
+                      name="resolved_issues" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[total_calls]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[total_calls]"
+                      name="total_calls" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[customer_birth_year]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[customer_birth_year]"
+                      name="customer_birth_year" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[customer_gender]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[customer_gender]"
+                      name="customer_gender" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[country]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[country]"
+                      name="country" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[region]"
+                      name="region" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[email]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[email]"
+                      name="email" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[operator_birth_year]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[operator_birth_year]"
+                      name="operator_birth_year" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[operator_gender]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[operator_gender]"
+                      name="operator_gender" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[department_name]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[department_name]"
+                      name="department_name" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[department_country]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[department_country]"
+                      name="department_country" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[department_region]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[department_region]"
+                      name="department_region" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[department_city]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[department_city]"
+                      name="department_city" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[department_street]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[department_street]"
+                      name="department_street" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[year]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[year]"
+                      name="year" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[month]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[month]"
+                      name="month" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[day]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[day]"
+                      name="day" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[hour]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[hour]"
+                      name="hour" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Conversation Fact Table.Paths[OLE DB Source Output]"
+              endId="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Conversation Fact Table\OLE DB Source - Staging Table.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -2659,6 +3455,14 @@ ORDER BY [year] ASC, [month] ASC, [day] ASC, [hour] ASC</property>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{F18B2518-AC73-45FD-AC44-26D86A228831}"
+      DTS:From="Package\Update operator_id in Staging Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load Conversation Fact Table" />
+    <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
       DTS:CreationName=""
       DTS:DTSID="{3D3B285F-D7CB-42C8-B57E-7069FA30E81A}"
@@ -3111,6 +3915,44 @@ ORDER BY [year] ASC, [month] ASC, [day] ASC, [hour] ASC</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="217.6,41.6"
+          Id="Package\Load Conversation Fact Table"
+          TopLeft="347.999986390273,946.233336384561" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="633.733313233323,902.725783283121">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-176.93332684305,43.5075531014409"
+              Start="0,0"
+              End="-176.93332684305,36.0075531014409">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.7537765507204" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.7537765507204"
+                    Point2="0,21.7537765507204"
+                    Point3="-4,21.7537765507204" />
+                  <mssgle:LineSegment
+                    End="-172.93332684305,21.7537765507204" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-172.93332684305,21.7537765507204"
+                    Point2="-176.93332684305,21.7537765507204"
+                    Point3="-176.93332684305,25.7537765507204" />
+                  <mssgle:LineSegment
+                    End="-176.93332684305,36.0075531014409" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -3454,6 +4296,82 @@ ORDER BY [year] ASC, [month] ASC, [day] ASC, [hour] ASC</property>
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load Conversation Fact Table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\Load Conversation Fact Table\OLE DB Source - Staging Table"
+          TopLeft="245.5,103.5" />
+        <NodeLayout
+          Size="293.6,41.6"
+          Id="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table"
+          TopLeft="580.5,220.5" />
+        <EdgeLayout
+          Id="Package\Load Conversation Fact Table.Paths[OLE DB Source Output]"
+          TopLeft="358.3,145.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="369,75.4000000000001"
+              Start="0,0"
+              End="369,67.9000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.7000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.7000000000001"
+                    Point2="0,37.7000000000001"
+                    Point3="4,37.7000000000001" />
+                  <mssgle:LineSegment
+                    End="365,37.7000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="365,37.7000000000001"
+                    Point2="369,37.7000000000001"
+                    Point3="369,41.7000000000001" />
+                  <mssgle:LineSegment
+                    End="369,67.9000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Conversation Fact Table\OLE DB Source - Staging Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Conversation Fact Table\OLE DB Destination - Conversation Fact Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
