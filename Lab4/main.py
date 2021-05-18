@@ -54,6 +54,7 @@ def main():
     rows = session.execute(SELECT_ALL_DATA_SCRIPT)
     print('DATA:')
     print(rows.all())
+    cluster.shutdown()
 
 
 if __name__ == '__main__':
