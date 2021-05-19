@@ -132,4 +132,4 @@ dmypy.json
 .idea
 
 # Security
-config.py
+security_config.py
