@@ -6,12 +6,12 @@ INSERT_DATA_SCRIPT = """
 INSERT INTO revenues
     (id, bfy, ftyp, fundtype, dpt, department, rsrc, revenue_source, budget, actuals)
 VALUES
-    ({id}, {bfy}, '{ftyp}', '{fundtype}', '{dpt}', '{department}', '{rsrc}', '{revenue_source}', {budget}, {actuals})
+    (uuid(), {bfy}, '{ftyp}', '{fundtype}', '{dpt}', '{department}', '{rsrc}', '{revenue_source}', {budget}, {actuals})
 """
 
 CREATE_TABLE_SCRIPT = """
 CREATE TABLE IF NOT EXISTS revenues (
-    id int PRIMARY KEY,
+    id uuid PRIMARY KEY,
     bfy int,
     ftyp text,
     fundtype text,
