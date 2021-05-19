@@ -5,14 +5,6 @@ from src.data_processor import DataProcessor
 from src.strategies import get_strategy
 from src.db_connector import CosmosDBConnector
 
-test_data = [
-    {'id': 1, 'bfy': 2016, 'ftyp': 'EFOP', 'fundtype': 'Enterprise Operating Fund',
-     'dpt': 'DWU', 'department': 'Water Utilities', 'rsrc': '8416',
-     'revenue_source': 'Misc-Proceeds Fr Sale Of Land', 'budget': 2500, 'actuals': 0},
-    {'id': 2, 'bfy': '2016', 'ftyp': 'EFOP', 'fundtype': 'Enterprise Operating Fund',
-     'dpt': 'DWU', 'department': 'Water Utilities', 'rsrc': '8458',
-     'revenue_source': 'Misc-Water Special Assessments', 'budget': 25300, 'actuals': 0}]
-
 
 def main():
     print('\tLab 4')

@@ -2,6 +2,15 @@ from urllib.request import urlopen
 import json
 
 
+def validate_data(data):
+    if data is dict:
+        data = [data]
+    for entry in data:
+        entry['bfy'] = int(entry['bfy'])
+        entry['budget'] = int(float(entry['budget']))
+        entry['actuals'] = int(float(entry['actuals']))
+
+
 class DataProcessor:
     def __init__(self, url_template, data_handler_strategy,
                  step=100, offset=0, limit=None):
@@ -39,6 +48,7 @@ class DataIterator:
                 step=self.step, offset=self.offset
         )) as data:
             result = json.loads(data.read().decode('utf-8'))
+            validate_data(result)
             self.offset += self.step
 
         return result
