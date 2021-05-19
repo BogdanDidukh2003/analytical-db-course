@@ -4,18 +4,10 @@ from ssl import PROTOCOL_TLSv1_2, CERT_NONE, SSLContext
 
 from src import cql_templates
 import config
+import src.utils
 
 
-class Singleton(type):
-    _instances = {}
-
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
-        return cls._instances[cls]
-
-
-class CosmosDBConnector(metaclass=Singleton):
+class CosmosDBConnector(metaclass=src.utils.Singleton):
     def __init__(self):
         ssl_context = SSLContext(PROTOCOL_TLSv1_2)
         ssl_context.verify_mode = CERT_NONE
@@ -42,5 +34,5 @@ class CosmosDBConnector(metaclass=Singleton):
         for record in data:
             self.session.execute(cql_templates.INSERT_DATA_SCRIPT.format(**record))
 
-    def get_all_data(self):
-        return self.session.execute(cql_templates.SELECT_ALL_DATA_SCRIPT)
+    def get_data_count(self):
+        return self.session.execute(cql_templates.SELECT_DATA_COUNT_SCRIPT)

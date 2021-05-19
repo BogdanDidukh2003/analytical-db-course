@@ -1,24 +1,29 @@
 from urllib.request import urlopen
 import json
 
-
-def validate_data(data):
-    if data is dict:
-        data = [data]
-    for entry in data:
-        entry['bfy'] = int(entry['bfy'])
-        entry['budget'] = int(float(entry['budget']))
-        entry['actuals'] = int(float(entry['actuals']))
+from src import constants
+from src.utils import validate_data
 
 
 class DataProcessor:
-    def __init__(self, url_template, data_handler_strategy,
+    def __init__(self, resource_name, url_template, data_handler_strategy, logger_strategy,
                  step=100, offset=0, limit=None):
+        self.resource_name = resource_name
         self.data_iterator = DataIterator(
             url_template=url_template, step=step, offset=offset, limit=limit)
         self.data_handler = data_handler_strategy()
+        self.logger = logger_strategy()
 
     def process_data(self):
+        log_status = self.logger.get_status(self.resource_name)
+        if log_status == constants.LOG_STATUS_COMPLETED:
+            self.logger.log_already_exists(self.resource_name)
+            return
+        elif log_status == constants.LOG_STATUS_START:
+            self.data_iterator.offset = self.logger.get_logged_rows_number(self.resource_name)
+        else:
+            self.logger.log_start(self.resource_name)
+
         for data in self.data_iterator:
             data_range = [
                 self.data_iterator.offset - self.data_iterator.step + 1,
@@ -26,6 +31,8 @@ class DataProcessor:
                     self.data_iterator.offset - (self.data_iterator.step - len(data))
                     )]
             self.data_handler.process_data(data, data_range=data_range)
+            self.logger.log_progress(self.resource_name, data_range=data_range)
+        self.logger.log_completed(self.resource_name)
 
 
 class DataIterator:
