@@ -1,4 +1,5 @@
 from config import MODE
+from src.db_connector import CosmosDBConnector
 
 
 def get_strategy():
@@ -16,9 +17,24 @@ class DataHandlerStrategy:
 
 
 class ConsoleOutputStrategy(DataHandlerStrategy):
-    def process_data(self, data):
-        print(data)
+    def process_data(self, data, data_range=None):
+        if data is dict:
+            data = [data]
+        if data_range is None:
+            data_range = [1, len(data)]
+        for entry in data:
+            print(entry)
+        print(f'Rows: {data_range[0]}-{data_range[1]}')
 
 
 class CosmosDBSavingStrategy(DataHandlerStrategy):
-    pass
+    def __init__(self):
+        self.db_connector = CosmosDBConnector()
+
+    def process_data(self, data, data_range=None):
+        if data is dict:
+            data = [data]
+        if data_range is None:
+            data_range = [1, len(data)]
+        self.db_connector.save_data(data)
+        print(f'Rows: {data_range[0]}-{data_range[1]}')

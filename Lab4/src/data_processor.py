@@ -19,9 +19,13 @@ class DataProcessor:
         self.data_handler = data_handler_strategy()
 
     def process_data(self):
-        for i, data in enumerate(self.data_iterator, start=1):
-            self.data_handler.process_data(data)
-            print(i)
+        for data in self.data_iterator:
+            data_range = [
+                self.data_iterator.offset - self.data_iterator.step + 1,
+                min(self.data_iterator.offset,
+                    self.data_iterator.offset - (self.data_iterator.step - len(data))
+                    )]
+            self.data_handler.process_data(data, data_range=data_range)
 
 
 class DataIterator:
