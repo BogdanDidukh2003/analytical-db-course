@@ -19,7 +19,7 @@ class CosmosDBConnector(metaclass=src.utils.Singleton):
                                auth_provider=auth_provider, ssl_context=ssl_context)
         self.session = self.cluster.connect(config.COSMOS_DB_KEYSPACE)
 
-    def close(self):
+    def __del__(self):
         self.cluster.shutdown()
 
     def delete_table(self):
