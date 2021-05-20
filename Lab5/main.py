@@ -22,9 +22,6 @@ def main():
     # db_connector = CosmosDBConnector()
     # print(db_connector.get_data_count().all())
 
-    if isinstance(writer_strategy, CosmosDBSavingStrategy):
-        db_connector = CosmosDBConnector()
-        db_connector.close()
     print('Done.')
 
 
