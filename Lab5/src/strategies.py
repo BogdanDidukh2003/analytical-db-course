@@ -1,6 +1,7 @@
 from config import MODE
 from src import constants
 from src.db_connector import CosmosDBConnector
+from src.event_hub_connector import EventHubConnector
 from src.log_connector import RedisConnector
 
 
@@ -9,6 +10,8 @@ def get_strategy():
         return ConsoleOutputStrategy, ConsoleLoggingStrategy
     elif MODE == 'REMOTE':
         return CosmosDBSavingStrategy, RedisLoggingStrategy
+    elif MODE == 'HUB':
+        return EventHubSendingStrategy, ConsoleLoggingStrategy
 
     return ConsoleOutputStrategy, ConsoleLoggingStrategy  # default
 
@@ -34,6 +37,16 @@ class CosmosDBSavingStrategy(DataHandlerStrategy):
         if data is dict:
             data = [data]
         self.db_connector.save_data(data)
+
+
+class EventHubSendingStrategy(DataHandlerStrategy):
+    def __init__(self):
+        self.event_hub_connector = EventHubConnector()
+
+    def process_data(self, data, data_range=None):
+        if data is dict:
+            data = [data]
+        self.event_hub_connector.save_data(data)
 
 
 class LoggerStrategy:
