@@ -31,7 +31,6 @@ export class Lab8Stack extends cdk.Stack {
       partitionKey: {
         name: MusicCatalogTable.artist,
         type: AttributeType.STRING
-
       },
       sortKey: {
         name: MusicCatalogTable.songId,
@@ -44,7 +43,6 @@ export class Lab8Stack extends cdk.Stack {
       partitionKey: {
         name: MusicCatalogTable.album,
         type: AttributeType.STRING
-
       },
       sortKey: {
         name: MusicCatalogTable.songId,
@@ -57,7 +55,6 @@ export class Lab8Stack extends cdk.Stack {
       partitionKey: {
         name: MusicCatalogTable.albumReleaseYear,
         type: AttributeType.NUMBER
-
       },
       sortKey: {
         name: MusicCatalogTable.songId,

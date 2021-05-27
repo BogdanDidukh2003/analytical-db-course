@@ -9,6 +9,7 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
+    "ts-node": "ts-node",
     "populate": "ts-node scripts/populate.ts",
     "deploy": "cdk deploy",
     "destroy": "cdk destroy --force"

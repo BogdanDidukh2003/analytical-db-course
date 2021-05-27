@@ -1,5 +1,5 @@
 export const DataConfig = {
-    artists: 25,
-    albums: 20,
-    songs: 10,
+    artists: 10,
+    albums: 10,
+    songs: 5,
 }
