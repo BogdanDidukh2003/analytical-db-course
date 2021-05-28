@@ -1,6 +1,7 @@
 import * as cdk from '@aws-cdk/core';
 import {
   AttributeType,
+  Attribute,
   BillingMode,
   Table,
 } from "@aws-cdk/aws-dynamodb";
@@ -27,40 +28,36 @@ export class Lab8Stack extends cdk.Stack {
       billingMode: BillingMode.PAY_PER_REQUEST,
     });
 
-    table.addGlobalSecondaryIndex({
-      partitionKey: {
-        name: MusicCatalogTable.artist,
-        type: AttributeType.STRING
-      },
-      sortKey: {
-        name: MusicCatalogTable.songId,
-        type: AttributeType.STRING
-      },
-      indexName: "artist_songId"
-    });
+    this.addIndex(table, {
+      name: MusicCatalogTable.artist,
+      type: AttributeType.STRING
+    }, {
+      name: MusicCatalogTable.songId,
+      type: AttributeType.STRING
+    }, "artist_songId");
 
-    table.addGlobalSecondaryIndex({
-      partitionKey: {
-        name: MusicCatalogTable.album,
-        type: AttributeType.STRING
-      },
-      sortKey: {
-        name: MusicCatalogTable.songId,
-        type: AttributeType.STRING
-      },
-      indexName: "album_songId"
-    });
+    this.addIndex(table, {
+      name: MusicCatalogTable.album,
+      type: AttributeType.STRING
+    }, {
+      name: MusicCatalogTable.songId,
+      type: AttributeType.STRING
+    }, "album_songId");
 
+    this.addIndex(table, {
+      name: MusicCatalogTable.albumReleaseYear,
+      type: AttributeType.NUMBER
+    }, {
+      name: MusicCatalogTable.songId,
+      type: AttributeType.STRING
+    }, "albumReleaseYear_songId");
+  }
+
+  private addIndex(table: Table, partitionKey: Attribute, sortKey: Attribute, indexName: string) {
     table.addGlobalSecondaryIndex({
-      partitionKey: {
-        name: MusicCatalogTable.albumReleaseYear,
-        type: AttributeType.NUMBER
-      },
-      sortKey: {
-        name: MusicCatalogTable.songId,
-        type: AttributeType.STRING
-      },
-      indexName: "albumReleaseYear_songId"
+      partitionKey,
+      sortKey,
+      indexName,
     });
   }
 }

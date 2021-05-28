@@ -18,13 +18,11 @@ async function populate() {
 async function populateArtists(genre: string) {
     let count = 0;
     for (let i = 0; i < DataConfig.artists; i++) {
-        // const artist = nameByRace("elf", { gender: "female", allowMultipleNames: true })
-        //     + `${Math.floor(Math.random() * 10000).toFixed(0)}`;
         const artist = nameByRace("elf", { gender: "female", allowMultipleNames: true })
             + ' ' + nameByRace("dragon", { gender: "male", allowMultipleNames: true }) + `${i}`;
-        const obj = Array.from(populateAlbums(genre, artist as string));
+        const dbEntryList = Array.from(populateAlbums(genre, artist as string));
 
-        for await (const persisted of dataMapper.batchPut(obj)) {
+        for await (const persisted of dataMapper.batchPut(dbEntryList)) {
             // console.log(persisted);
             count += 1;
         }
@@ -48,8 +46,6 @@ function* getSongs(genre: string, artist: string, album: string) {
         const songDuration = Math.floor((Math.random() * 200 + 50));
         const song = nameByRace("elf", { gender: "female", allowMultipleNames: true })
             + ' ' + nameByRace("angel", { gender: "female", allowMultipleNames: true });
-        // const song = nameByRace("elf", { gender: "female", allowMultipleNames: true })
-        //     + `${Math.floor(Math.random() * 10000 + 10000).toFixed(0)}`;
 
         const songRecord = MusicCatalog.create({
             genre: genre,
